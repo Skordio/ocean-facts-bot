@@ -34,6 +34,9 @@ def main():
     except FileNotFoundError:
         logger.error("Token file not found. Please ensure 'tokens/ocean_fact_bot' exists.")
         return
+    except Exception as e:
+        logger.error(f"Error reading token file: {str(e)}")
+        return
     
     # Error handling
     def handle_error(msg: str):
