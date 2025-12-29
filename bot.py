@@ -23,9 +23,11 @@ class OceanFactBot(discord.Client):
             logger.info(f'Message from {message.author}: {message.content}')
 
 def main():
+    # Intialize
     intents = discord.Intents(messages=True, guilds=True, guild_messages=True, message_content=True)
     bot = OceanFactBot(intents=intents)
 
+    # Get token
     try:
         with open('tokens/ocean_fact_bot', 'r') as file:
             token = file.read().strip()
@@ -33,10 +35,12 @@ def main():
         logger.error("Token file not found. Please ensure 'tokens/ocean_fact_bot' exists.")
         return
     
+    # Error handling
     def handle_error(msg: str):
         logger.error(msg)
         sys.exit(1)
 
+    # Run
     try:
         bot.run(token)
     except discord.LoginFailure:
