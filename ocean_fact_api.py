@@ -1,7 +1,7 @@
 import requests, pprint, logging
 
 def get_ocean_fact():
-    logging.basicConfig(filename='ocean_fact_api.log', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S', format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.basicConfig(filename='api.log', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S', format='%(asctime)s - %(levelname)s - %(message)s')
     error_bot_response = "Sorry, I couldn't find anything. Tell Skordio to go fix the API."
     error_log_msg = "Error fetching ocean fact."
     try:
