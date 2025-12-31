@@ -6,6 +6,15 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 logger = logging.getLogger(__name__)
 
 class OceanFactBot(discord.Client):
+    # Util funcs
+    def help_msg(self) -> str:
+        return ("Ocean Fact Bot Commands:\n"
+                "$seafact - Get a random ocean fact.\n")
+    
+    def unknown_command_msg(self) -> str:
+        return "Unknown command. Use `$seafact` to get an ocean fact."
+
+    # Discord API funcs
     async def on_ready(self):
         logger.info(f'Logged on as {self.user}')
 
@@ -15,10 +24,21 @@ class OceanFactBot(discord.Client):
         if not message.content or not isinstance(message.content, str):
             return
         
-        if not message.content.lower().find('ocean fact') == -1:
-            logger.info(f'Message from {message.author}: {message.content} - Responding with an ocean fact.')
-            fact = get_ocean_fact()
-            await message.channel.send(fact)
+        formatted_msg = message.content.lower().strip().split()
+        
+        if len(formatted_msg) >= 1 and formatted_msg[0].startswith('$seafact'):
+            if len(formatted_msg) > 1:
+                match formatted_msg[1]:
+                    case 'help':
+                        logger.info(f'Message from {message.author}: {message.content} - Responding with help message.')
+                        await message.channel.send(self.help_msg())
+                    case _:
+                        logger.info(f'Message from {message.author}: {message.content} - Unknown command argument.')
+                        await message.channel.send(self.unknown_command_msg())
+            else:
+                logger.info(f'Message from {message.author}: {message.content} - Responding with an ocean fact.')
+                fact = get_ocean_fact()
+                await message.channel.send(fact)
         else:
             logger.info(f'Message from {message.author}: {message.content}')
 
