@@ -6,15 +6,15 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 logger = logging.getLogger(__name__)
 
 class OceanFactBot(discord.Client):
-    # Util funcs
+    # Util funcs ##############################################################
     def help_msg(self) -> str:
         return ("Ocean Fact Bot Commands:\n"
-                "$seafact - Get a random ocean fact.\n")
+                "!oceanfact - Get a random ocean fact.\n")
     
     def unknown_command_msg(self) -> str:
-        return "Unknown command. Use `$seafact` to get an ocean fact."
+        return "Unknown command. Use `!oceanfact` to get an ocean fact."
 
-    # Discord API funcs
+    # Discord API funcs #######################################################
     async def on_ready(self):
         logger.info(f'Logged on as {self.user}')
 
@@ -26,7 +26,7 @@ class OceanFactBot(discord.Client):
         
         formatted_msg = message.content.lower().strip().split()
         
-        if len(formatted_msg) >= 1 and formatted_msg[0].startswith('$seafact'):
+        if len(formatted_msg) >= 1 and formatted_msg[0].startswith('!oceanfact'):
             if len(formatted_msg) > 1:
                 match formatted_msg[1]:
                     case 'help':
