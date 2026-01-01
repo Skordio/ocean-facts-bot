@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 class OceanFactBot(discord.Client):
     # Util funcs ##############################################################
     def help_msg(self) -> str:
-        return ("Ocean Fact Bot Commands:\n"
+        return ("My Commands:\n"
                 "!oceanfact - Get a random ocean fact.\n")
     
     def unknown_command_msg(self) -> str:
